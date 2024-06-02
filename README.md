@@ -9,3 +9,6 @@ This mod requires Balamod v1.0.5 (gui v1.2.3) or higher. Find [balamod releases 
 ![Deselect button in standard game play](https://i.imgur.com/sy2yoT4.png)
 - Deselect button with booster packs.
 ![Deselect button in a booster pack](https://i.imgur.com/XKIIm8c.png)
+
+## Other Mods
+- [Balatro Safety](https://github.com/Zei33/balatro-safety-balamod) - Get a confirmation dialogue before committing to a dangerous action.
