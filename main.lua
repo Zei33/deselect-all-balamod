@@ -31,7 +31,7 @@ local function on_enable()
 				padding = 0.3, 
 				r = 0.1, 
 				hover = true, 
-				colour = G.C.GREEN, 
+				colour = G.C.ORANGE, 
 				button = "deselect_all_highlighted", 
 				shadow = true,
 				func = "deselect_all_some_highlighted",
@@ -58,9 +58,121 @@ local function on_enable()
 		return t
 	end
 
+	original_create_UIBox_arcana_pack = create_UIBox_arcana_pack
+
+	function create_UIBox_arcana_pack()
+		local deselect_button_text = {
+			n=G.UIT.T, 
+			config={
+				text = "Deselect", 
+				scale = 0.5, 
+				colour = G.C.WHITE, 
+				shadow = true, 
+				func = 'set_button_pip'
+			}
+		}
+
+		local deselect_button = {
+			n=G.UIT.C,
+			config={
+				align = "tm", 
+				padding = 0.05, 
+				minw = 2.4
+			}, 
+			nodes={
+				{
+					n=G.UIT.R,
+					config={minh=0.2}, 
+					nodes={}
+				},
+				{
+					n=G.UIT.R,
+					config={
+						align = "tr",
+						padding = 0.2, 
+						minh = 1.2, 
+						minw = 1.8, 
+						r=0.15,
+						colour = G.C.ORANGE, 
+						button = 'deselect_all_highlighted', 
+						hover = true,
+						shadow = true, 
+						func = 'deselect_all_some_highlighted',
+						deselect_button_text = deselect_button_text
+					}, 
+					nodes = {
+						deselect_button_text
+					}
+				}
+			}
+		}
+
+		local t = original_create_UIBox_arcana_pack()
+
+		t.nodes[1].nodes[3].nodes[1] = deselect_button
+
+		return t
+	end
+
+	original_create_UIBox_spectral_pack = create_UIBox_spectral_pack
+
+	function create_UIBox_spectral_pack()
+		local deselect_button_text = {
+			n=G.UIT.T, 
+			config={
+				text = "Deselect", 
+				scale = 0.5, 
+				colour = G.C.WHITE, 
+				shadow = true, 
+				func = 'set_button_pip'
+			}
+		}
+
+		local deselect_button = {
+			n=G.UIT.C,
+			config={
+				align = "tm", 
+				padding = 0.05, 
+				minw = 2.4
+			}, 
+			nodes={
+				{
+					n=G.UIT.R,
+					config={minh=0.2}, 
+					nodes={}
+				},
+				{
+					n=G.UIT.R,
+					config={
+						align = "tr",
+						padding = 0.2, 
+						minh = 1.2, 
+						minw = 1.8, 
+						r=0.15,
+						colour = G.C.ORANGE, 
+						button = 'deselect_all_highlighted', 
+						hover = true,
+						shadow = true, 
+						func = 'deselect_all_some_highlighted',
+						deselect_button_text = deselect_button_text
+					}, 
+					nodes = {
+						deselect_button_text
+					}
+				}
+			}
+		}
+
+		local t = original_create_UIBox_spectral_pack()
+
+		t.nodes[1].nodes[3].nodes[1] = deselect_button
+
+		return t
+	end
+
 	G.FUNCS.deselect_all_some_highlighted = function(e)
 		if #G.hand.highlighted > 0 then
-			e.config.colour = G.C.GREEN
+			e.config.colour = G.C.ORANGE
 			e.config.button = 'deselect_all_highlighted'
 			e.config.deselect_button_text.config.colour = G.C.UI.TEXT_LIGHT
 		elseif deselect_all_timer > 0 then
@@ -96,6 +208,10 @@ local function on_disable()
 	G.FUNCS.deselect_all_highlighted = nil
 	G.FUNCS.deselect_all_some_highlighted = nil
 	create_UIBox_buttons = original_create_UIBox_buttons
+	create_UIBox_arcana_pack = original_create_UIBox_arcana_pack
+	create_UIBox_spectral_pack = original_create_UIBox_spectral_pack
+
+	console.removeCommand('booster')
 end
 
 local function menu()
