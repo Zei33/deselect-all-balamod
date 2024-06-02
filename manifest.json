@@ -1,0 +1,11 @@
+{
+	"id": "deselect-all",
+	"name": "Deselect All",
+	"version": "1.0.0",
+	"description": [
+		"Adds a button to deselect all highlighted cards."
+	],
+	"author": "Zei33 <balatro@zei.gg>",
+	"load_before": [],
+	"load_after": []
+}
